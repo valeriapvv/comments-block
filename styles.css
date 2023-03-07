@@ -252,7 +252,6 @@ a {
   background-color: #ffffff;
   font-family: "Oswald", "Arial", sans-serif;
   color: #333333;
-  text-transform: uppercase;
   border: 1px solid #e6e6e6;
   outline: none;
   transition: border .2s ease-in;
@@ -260,6 +259,11 @@ a {
 
 .field__input::placeholder {
   color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+
+.field__input--date {
+  text-transform: uppercase;
 }
 
 .field__error {

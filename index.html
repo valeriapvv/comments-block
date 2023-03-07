@@ -11,10 +11,10 @@
 		<h1 class="visually-hidden">Блок с комментариями</h1>
 
 		<!-- Список комментариев -->
-		<ul class="chat__list">
-      <li class="chat__item">
+		<ul class="chat__list" id="comments-list">
+      <li class="chat__item" data-comment-id="0">
 				<span class="chat__username">John Doe</span>
-				<time class="chat__publication-time" datetime="2023-03-05">03 Марта 2023 г</time>
+				<time class="chat__publication-time" datetime="2023-03-05">01.01.2023, 10:00</time>
 				<p class="chat__comment">The use of "John Doe" as a name for anonymous or unidentified people dates to
 					13th century England, when the name was first used in legal documents to protect the identity of witnesses.
 				</p>
@@ -34,12 +34,12 @@
 		</ul>
 
 		<!-- Форма комментария -->
-		<form class="form" action="#" method="post">
+		<form class="form" name="comment-form" action="#" method="post">
 
 			<!-- Имя -->
 			<div class="field">
 				<label class="field__label" for="username">Имя</label>
-				<input class="field__input" type="text" name="username" id="username" minlength="3" maxlength="50"
+				<input class="field__input" type="text" name="user-name" id="user-name" minlength="3" maxlength="50"
 					placeholder="Ваше имя" required>
 				<span class="field__error">Заполните поле</span>
 			</div>
