@@ -1,15 +1,8 @@
 import {FormElement} from '../data/constants.js';
 import {formatDate} from '../utils.js';
 
-const defaultComment = {
-  id: 0,
-  [FormElement.UserName]: 'John Doe',
-  [FormElement.Comment]: 'The use of "John Doe" as a name for anonymous or unidentified people dates to 13th century England, when the name was first used in legal documents to protect the identity of witnesses.',
-  [FormElement.Date]: '2023-01-01T10:00',
-};
-
-const getCommentTemplate = (userComment = defaultComment) => {
-  const id = userComment.id;
+const getCommentTemplate = (userComment = {}) => {
+  const commentId = userComment.commentId;
   const name = userComment[FormElement.UserName];
   const comment = userComment[FormElement.Comment];
   const date = formatDate(
@@ -17,7 +10,7 @@ const getCommentTemplate = (userComment = defaultComment) => {
   );
 
   return (`
-    <li class="chat__item" data-comment-id="${id}">
+    <li class="chat__item" data-comment-id="${commentId}">
       <span class="chat__username">${name}</span>
       <time class="chat__publication-time" datetime="${date.datetime}">${date.humanized}</time>
       <p class="chat__comment">${comment}</p>
@@ -41,7 +34,7 @@ const renderComment = ({
   userComment,
   commentsContainer,
 } = {}) => {
-  commentsContainer.insertAdjacentHTML('beforeend', getCommentTemplate(userComment));
+  commentsContainer.insertAdjacentHTML('afterbegin', getCommentTemplate(userComment));
 };
 
 export {

@@ -30,6 +30,26 @@ const formatDate = (dateToFormat) => {
   };
 };
 
+// Form
+
+const generateId = () => `id${Date.now()}`;
+
+const convertToJson = (formData) => {
+  if (!(formData instanceof FormData)) {
+    throw new Error('Некорректные данные формы');
+  }
+
+  const result = {};
+
+  for (const [name, value] of formData) {
+    result[name] = value;
+  }
+
+  return JSON.stringify(result);
+};
+
 export {
   formatDate,
+  generateId,
+  convertToJson,
 };
