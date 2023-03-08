@@ -58,6 +58,42 @@ a {
   overflow: hidden;
 }
 
+/* Button */
+
+.button {
+  display: inline-block;
+  padding: 10px 45px;
+
+  font-family: inherit;
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+
+  border: none;
+  background-color: #00DBDE;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease-out;
+}
+
+.button:hover {
+  background-color: #05babd;
+}
+
+.button:active,
+.button:focus {
+  color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.button:disabled,
+.button--disabled {
+  background-color: #ededed;
+  pointer-events: none;
+}
+
 /* Chat */
 
 .chat {
@@ -119,7 +155,8 @@ a {
 
 /* Chat buttons */
 
-.button {
+.chat__favorite,
+.chat__delete {
   width: 32px;
   height: 32px;
   border: none;
@@ -183,54 +220,12 @@ a {
   color: red;
 }
 
-/* Form */
-
-.form {
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.form__send {
-  align-self: flex-end;
-  padding: 10px;
-  border: none;
-  background-color: #00DBDE;
-  font-family: inherit;
-  font-size: 16px;
-  line-height: 20px;
-  color: #ffffff;
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.3s ease-out;
-}
-
-.form__send:hover {
-  background-color: #05babd;
-}
-
-.form__send:active,
-.form__send:focus {
-  color: rgba(255, 255, 255, 0.3);
-  outline: none;
-}
-
-.form__send:disabled,
-.form__send--disabled {
-  background-color: #ededed;
-  pointer-events: none;
-}
-
 /* Field */
 
 .field {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
 }
 
 .field__label {
@@ -301,4 +296,69 @@ a {
 .field__input:active,
 .field__input:focus {
   border: 1px solid #00DBDE;
+}
+
+
+/* Form */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.form__field {
+  margin-bottom: 40px;
+}
+
+.form__send {
+  align-self: flex-end;
+}
+
+
+/* Popup */
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: rgba(255, 255, 255, 0.5)
+}
+
+.popup__inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 400px;
+  height: fit-content;
+  margin: auto;
+  padding: 60px;
+  padding-bottom: 45px;
+
+  font-size: 24px;
+  text-transform: uppercase;
+
+  border: 1px solid #e6e6e6;
+  background-color: #ffffff;
+}
+
+.popup__message {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.popup__close {
+  display: block;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
 }

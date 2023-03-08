@@ -15,13 +15,13 @@ const getCommentTemplate = (userComment = {}) => {
       <time class="chat__publication-time" datetime="${date.datetime}">${date.humanized}</time>
       <p class="chat__comment">${comment}</p>
 
-      <button class="chat__delete button" type="button" aria-label="Удалить комментарий">
+      <button class="chat__delete" type="button" aria-label="Удалить комментарий">
         <svg class="chat__delete-icon" width="24" height="24" aria-hidden="true" focusable="false">
           <use href="img/sprite.svg#bin" />
         </svg>
       </button>
 
-      <button class="chat__favorite button" type="button" aria-label="Добавить в избранные">
+      <button class="chat__favorite" type="button" aria-label="Добавить в избранные">
         <svg class="chat__favorite-icon" width="24" height="24" aria-hidden="true" focusable="false">
           <use href="img/sprite.svg#heart" />
         </svg>
