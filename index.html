@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<main class="chat">
-		<h1 class="visually-hidden">Блок с комментариями</h1>
+  <main class="chat">
+    <h1 class="visually-hidden">Блок с комментариями</h1>
 
-		<!-- Список комментариев -->
-		<ul class="chat__list" id="comments-list">
+    <!-- Список комментариев -->
+    <ul class="chat__list" id="comments-list">
       <li class="chat__item" data-comment-id="0">
-				<span class="chat__username">John Doe</span>
-				<time class="chat__publication-time" datetime="2023-03-05">01.01.2023, 10:00</time>
-				<p class="chat__comment">The use of "John Doe" as a name for anonymous or unidentified people dates to
-					13th century England, when the name was first used in legal documents to protect the identity of witnesses.
-				</p>
+        <span class="chat__username">John Doe</span>
+        <time class="chat__publication-time" datetime="2023-03-05">01.01.2023, 10:00</time>
+        <p class="chat__comment">The use of "John Doe" as a name for anonymous or unidentified people dates to
+          13th century England, when the name was first used in legal documents to protect the identity of witnesses.
+        </p>
 
-				<button class="chat__delete" type="button" aria-label="Удалить комментарий">
-					<svg class="chat__delete-icon" width="24" height="24" aria-hidden="true" focusable="false">
-						<use href="img/sprite.svg#bin" />
-					</svg>
-				</button>
+        <button class="chat__delete" type="button" aria-label="Удалить комментарий">
+          <svg class="chat__delete-icon" width="24" height="24" aria-hidden="true" focusable="false">
+            <use href="img/sprite.svg#bin" />
+          </svg>
+        </button>
 
-				<button class="chat__favorite" type="button" aria-label="Добавить в избранные">
-					<svg class="chat__favorite-icon" width="24" height="24" aria-hidden="true" focusable="false">
+        <button class="chat__favorite" type="button" aria-label="Добавить в избранные">
+          <svg class="chat__favorite-icon" width="24" height="24" aria-hidden="true" focusable="false">
             <use href="img/sprite.svg#heart" />
-					</svg>
-				</button>
-			</li>
-		</ul>
+          </svg>
+        </button>
+      </li>
+    </ul>
 
-		<!-- Форма комментария -->
-		<form class="form" name="comment-form" action="#" method="post">
+    <!-- Форма комментария -->
+    <form class="form" name="comment-form" action="#" method="post">
+      <fieldset class="form__fieldset">
+        <legend class="visually-hidden">Форма комментария</legend>
 
-			<!-- Имя -->
-			<div class="form__field field">
-				<label class="field__label" for="username">Имя</label>
-				<input class="field__input" type="text" name="user-name" id="user-name" minlength="3" maxlength="50"
-					placeholder="Ваше имя" required>
-				<span class="field__error">Заполните поле</span>
-			</div>
+        <!-- Имя -->
+        <div class="form__field field">
+          <label class="field__label" for="user-name">Имя</label>
+          <input class="field__input" type="text" name="user-name" id="user-name" minlength="3" maxlength="50"
+            placeholder="Ваше имя" required>
+          <span class="field__error">Заполните поле</span>
+        </div>
 
-			<!-- Комментарий -->
-			<div class="form__field field field--comment">
-				<label class="field__label" for="comment">Комментарий</label>
-				<textarea class="field__input" name="comment" id="comment" minlength="3" maxlength="200"
-					placeholder="Напишите ваш комментарий" required></textarea>
-				<span class="field__error">Заполните поле</span>
-			</div>
+        <!-- Комментарий -->
+        <div class="form__field field field--comment">
+          <label class="field__label" for="comment">Комментарий</label>
+          <textarea class="field__input" name="comment" id="comment" minlength="3" maxlength="200"
+            placeholder="Напишите ваш комментарий" required></textarea>
+          <span class="field__error">Заполните поле</span>
+        </div>
 
-			<!-- Дата -->
-			<div class="form__field field">
-				<label class="field__label" for="date">Дата</label>
-				<input class="field__input field__input--date" type="date" name="date" id="date">
-			</div>
+        <!-- Дата -->
+        <div class="form__field field">
+          <label class="field__label" for="date">Дата</label>
+          <input class="field__input field__input--date" type="date" name="date" id="date">
+        </div>
+      </fieldset>
 
-			<!-- Кнопка отправки комментария -->
-			<button class="form__send button" type="submit">Отправить</button>
-		</form>
-	</main>
+      <!-- Кнопка отправки комментария -->
+      <button class="form__send button" type="submit">Отправить</button>
+    </form>
+  </main>
 
   <!-- Ошибка -->
-  <div class="popup popup--error hidden">
+  <div class="popup popup--message hidden">
     <div class="popup__inner">
       <p class="popup__message">Произошла ошибка</p>
       <button class="popup__close button" type="button">OK</button>
     </div>
   </div>
 
-	<script src="js/main.js" type="module"></script>
+  <script src="js/main.js" type="module"></script>
 </body>
 </html>

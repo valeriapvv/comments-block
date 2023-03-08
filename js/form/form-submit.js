@@ -4,7 +4,9 @@ import {generateId} from '../utils.js';
 // Form
 
 const form = document.forms[FormElement.Form];
+const formFieldsets = form.querySelectorAll('fieldset');
 const formFields = form.elements;
+const submitButton = form.querySelector('[type="submit"]');
 
 // Fields
 
@@ -37,14 +39,39 @@ const getDataToSend = () => {
   return data;
 };
 
-const setFormSubmit = (callback) => {
+const disableForm = () => {
+  for (const group of formFieldsets) {
+    group.disabled = true;
+  }
+
+  submitButton.disabled = true;
+};
+
+const enableForm = () => {
+  for (const group of formFieldsets) {
+    group.disabled = false;
+  }
+
+  submitButton.disabled = false;
+};
+
+// Очистка формы после успешной отправки
+const onSuccessCb = () => {
+  form.reset();
+};
+
+const setFormSubmit = (sendData) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
 
     const formData = getDataToSend();
-    callback(formData);
+    disableForm();
 
-    evt.target.reset();
+    sendData({
+      formData,
+      onSuccessCb,
+      onFinalCb: enableForm,
+    });
   };
 
   form.addEventListener('submit', onSubmit);
