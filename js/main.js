@@ -6,6 +6,7 @@ import {showMessage} from './popups/popup.js';
 //// Инициализирует работу формы
 
 const commentsContainer = document.querySelector('#comments-list');
+const commentItems = commentsContainer.children;
 
 // Тестируем отправку данных на фейковый url
 
@@ -24,6 +25,7 @@ const formSubmitCb = ({
     renderComment({
       userComment: data,
       commentsContainer,
+      commentItems,
     });
 
     onSuccessCb();

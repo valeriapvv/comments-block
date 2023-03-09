@@ -1,6 +1,13 @@
 import {FormElement} from '../data/constants.js';
 import {formatDate} from '../utils.js';
 
+const Insert = {
+  Before: 'beforebegin',
+  After: 'afterend',
+  Append: 'beforeend',
+  Prepend: 'afterbegin',
+};
+
 const getCommentTemplate = (userComment = {}) => {
   const commentId = userComment.commentId;
   const name = userComment[FormElement.UserName];
@@ -10,7 +17,7 @@ const getCommentTemplate = (userComment = {}) => {
   );
 
   return (`
-    <li class="chat__item" data-comment-id="${commentId}">
+    <li class="chat__item" data-datetime="${date.datetime}" data-comment-id="${commentId}">
       <span class="chat__username">${name}</span>
       <time class="chat__publication-time" datetime="${date.datetime}">${date.humanized}</time>
       <p class="chat__comment">${comment}</p>
@@ -30,11 +37,37 @@ const getCommentTemplate = (userComment = {}) => {
   `);
 };
 
+const findEarlierComment = (newCommentDate, commentItems) => {
+  const isEarlier = (item) => {
+    const itemDate = new Date(item.dataset.datetime);
+    return newCommentDate >= itemDate;
+  };
+
+  return Array.from(commentItems)
+    .find(isEarlier);
+};
+
 const renderComment = ({
   userComment,
   commentsContainer,
+  commentItems,
 } = {}) => {
-  commentsContainer.insertAdjacentHTML('afterbegin', getCommentTemplate(userComment));
+  const commentTemplate = getCommentTemplate(userComment);
+
+  if (!commentItems.length) {
+    commentsContainer.insertAdjacentHTML(Insert.Append, commentTemplate);
+    return;
+  }
+
+  const commentDate = new Date(userComment.date);
+  const earlierComment = findEarlierComment(commentDate, commentItems);
+
+  if (!earlierComment) {
+    commentsContainer.insertAdjacentHTML(Insert.Append, commentTemplate);
+    return;
+  }
+
+  earlierComment.insertAdjacentHTML(Insert.Before, commentTemplate);
 };
 
 export {

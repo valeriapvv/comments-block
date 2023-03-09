@@ -33,6 +33,7 @@ const getCommentDate = (fieldValue) => {
   // Для выбранной даты устанавливаем текущее время
   date.setHours(now.getHours());
   date.setMinutes(now.getMinutes());
+  date.setSeconds(now.getSeconds());
 
   return date;
 };

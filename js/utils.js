@@ -1,6 +1,6 @@
 // Date
 
-const formatByTwoDigits = (dateUnit) => dateUnit < 10 ? `0${  dateUnit}` : dateUnit;
+const formatByTwoDigits = (dateUnit) => dateUnit < 10 ? `0${dateUnit}` : dateUnit;
 
 const formatDate = (dateToFormat) => {
   const date = new Date(dateToFormat);
@@ -18,6 +18,9 @@ const formatDate = (dateToFormat) => {
   const minutes = formatByTwoDigits(
     date.getMinutes()
   );
+  const seconds = formatByTwoDigits(
+    date.getSeconds()
+  );
 
 
   return {
@@ -25,7 +28,7 @@ const formatDate = (dateToFormat) => {
       return `${day}.${month}.${year}, ${hours}:${minutes}`;
     },
     get datetime() {
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     },
   };
 };
