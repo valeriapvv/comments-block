@@ -72,13 +72,12 @@ const setFormSubmit = (sendData) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
 
-    const formData = getDataToSend();
-    disableForm();
-
     if (!validation.check()) {
-      enableForm();
       return;
     }
+
+    const formData = getDataToSend();
+    disableForm();
 
     sendData({
       formData,

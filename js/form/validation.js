@@ -1,30 +1,22 @@
-import {FormElement, InputClassName} from '../data/constants.js';
+import {
+  FormElement,
+  InputClassName,
+  UserNameLength,
+  COMMENT_MAX_LENGTH,
+  NameErrorType,
+  CommentErrorType,
+} from '../data/constants.js';
+import {
+  UserNameError,
+  CommentError,
+} from './validation-errors.js';
 
-const UserNameLength = {
-  Min: 2,
-  Max: 50,
+const ErrorByName = {
+  [FormElement.UserName]: UserNameError,
+  [FormElement.Comment]: CommentError,
 };
 
-const ErrorType = {
-  MinLength: 'minLength',
-  MaxLength: 'maxLength',
-  Empty: 'empty',
-};
-
-const UserNameError = {
-  [ErrorType.MinLength]: `Длина имени должна быть не меньше ${UserNameLength.Min}`,
-  [ErrorType.MaxLength]: `Длина имени должна быть не больше ${UserNameLength.Max}`,
-  [ErrorType.Empty]: 'Введите свое имя',
-  _message: null,
-  set message(type) {
-    this._message = this[type];
-  },
-  get message() {
-    return this._message;
-  },
-};
-
-class Validation {
+export default class Validation {
   #form = null;
   #fieldContainerClassName = 'field-container';
   #errorClassName = 'error';
@@ -48,29 +40,52 @@ class Validation {
   }
 
   check() {
+    let isValid = true;
+
     if (!this.#isValidName()) {
       this.#showError(FormElement.UserName);
-      return false;
+      isValid = false;
     }
 
-    return true;
+    if (!this.#isValidComment()) {
+      this.#showError(FormElement.Comment);
+      isValid = false;
+    }
+
+    return isValid;
   }
 
   #isValidName() {
     const userNameValue = this.#form[FormElement.UserName].value;
 
     if (!userNameValue) {
-      UserNameError.message = ErrorType.Empty;
+      UserNameError.message = NameErrorType.Empty;
       return false;
     }
 
     if (userNameValue.length < UserNameLength.Min) {
-      UserNameError.message = ErrorType.MinLength;
+      UserNameError.message = NameErrorType.MinLength;
       return false;
     }
 
     if (userNameValue.length > UserNameLength.Max) {
-      UserNameError.message = ErrorType.MaxLength;
+      UserNameError.message = NameErrorType.MaxLength;
+      return false;
+    }
+
+    return true;
+  }
+
+  #isValidComment() {
+    const commentValue = this.#form[FormElement.Comment].value;
+
+    if (!commentValue) {
+      CommentError.message = CommentErrorType.Empty;
+      return false;
+    }
+
+    if (commentValue.length > COMMENT_MAX_LENGTH) {
+      CommentError.message = CommentErrorType.MaxLength;
       return false;
     }
 
@@ -79,7 +94,7 @@ class Validation {
 
   #showError = (elementName) => {
     this.#form[elementName].classList.add(InputClassName.IsInvalid);
-    this.#ErrorElement[elementName].textContent = UserNameError.message;
+    this.#ErrorElement[elementName].textContent = ErrorByName[elementName].message;
   };
 
   #setErrorElements = () => {
@@ -93,5 +108,3 @@ class Validation {
   };
 
 }
-
-export default Validation;
