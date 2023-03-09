@@ -48,8 +48,13 @@ const convertToJson = (formData) => {
   return JSON.stringify(result);
 };
 
+//
+
+const isValidLength = (string, min, max) => string.length >= min && string.length <= max;
+
 export {
   formatDate,
   generateId,
   convertToJson,
+  isValidLength,
 };

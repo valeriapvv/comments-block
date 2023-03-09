@@ -1,5 +1,6 @@
 import {FormElement} from '../data/constants.js';
 import {generateId} from '../utils.js';
+import Validation from './validation.js';
 
 // Form
 
@@ -7,6 +8,13 @@ const form = document.forms[FormElement.Form];
 const formFieldsets = form.querySelectorAll('fieldset');
 const formFields = form.elements;
 const submitButton = form.querySelector('[type="submit"]');
+
+// Validation instance
+const validation = new Validation({
+  form,
+  fieldContainerClassName: 'field',
+  errorClassName: 'field__error',
+});
 
 // Fields
 
@@ -66,6 +74,11 @@ const setFormSubmit = (sendData) => {
 
     const formData = getDataToSend();
     disableForm();
+
+    if (!validation.check()) {
+      enableForm();
+      return;
+    }
 
     sendData({
       formData,

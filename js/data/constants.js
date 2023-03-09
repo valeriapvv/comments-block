@@ -5,6 +5,12 @@ const FormElement = {
   Date: 'date',
 };
 
+const InputClassName = {
+  IsValid: 'is-valid',
+  IsInvalid: 'is-invalid',
+};
+
 export {
   FormElement,
+  InputClassName,
 };
