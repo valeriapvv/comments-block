@@ -37,6 +37,8 @@ export default class Validation {
 
     // Найдем элементы, отвечающие за сообщения об ошибке
     this.#setErrorElements();
+
+    this.#setInputHandler();
   }
 
   check() {
@@ -92,12 +94,28 @@ export default class Validation {
     return true;
   }
 
-  #showError = (elementName) => {
+  #showError(elementName) {
     this.#form[elementName].classList.add(InputClassName.IsInvalid);
     this.#ErrorElement[elementName].textContent = ErrorByName[elementName].message;
-  };
+  }
 
-  #setErrorElements = () => {
+  #hideError(elementName) {
+    this.#form[elementName].classList.remove(InputClassName.IsInvalid);
+    this.#ErrorElement[elementName].textContent = '';
+  }
+
+  #setInputHandler() {
+    this.#form.addEventListener('input', (evt) => {
+      const element = evt.target;
+      const hasInvalidClassName = element.classList.contains(InputClassName.IsInvalid);
+
+      if (hasInvalidClassName) {
+        this.#hideError(element.name);
+      }
+    });
+  }
+
+  #setErrorElements() {
     for (const elementName of Object.values(FormElement)) {
       const container = this.#fieldContainerClassName;
       const error = this.#errorClassName;
@@ -105,6 +123,6 @@ export default class Validation {
       this.#ErrorElement[elementName] = this.#form
         .querySelector(`.${container}--${elementName} .${error}`);
     }
-  };
+  }
 
 }
