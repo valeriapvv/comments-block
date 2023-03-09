@@ -2,6 +2,7 @@ import {setFormSubmit} from './form/form-submit.js';
 import {renderComment} from './comments/render-comments.js';
 import {sendForm} from './api.js';
 import {showMessage} from './popups/popup.js';
+import {setCommentDelete} from './comments/comment-delete.js';
 
 //// Инициализирует работу формы
 
@@ -44,3 +45,11 @@ const formSubmitCb = ({
 // Добавляет обработчик отправки формы
 
 setFormSubmit(formSubmitCb);
+
+//// Реализует удаление комментария
+setCommentDelete({
+  commentsContainer,
+  commentClassName: 'chat__item',
+  deleteClassName: 'chat__delete',
+  url: jsonplaceholderUrl,
+});

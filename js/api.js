@@ -3,6 +3,7 @@ import {convertToJson} from './utils.js';
 const Method = {
   Get: 'GET',
   Post: 'POST',
+  Delete: 'DELETE',
 };
 
 const load = async ({
@@ -53,6 +54,25 @@ const sendForm = async ({
   }
 };
 
+const sendCommentDelete = async ({
+  url,
+  commentId,
+  onSuccess,
+  onFail,
+}) => {
+  try {
+    await load({
+      url: `${url}${commentId}`,
+      method: Method.Delete,
+    });
+
+    onSuccess();
+  } catch (error) {
+    onFail();
+  }
+};
+
 export {
   sendForm,
+  sendCommentDelete,
 };
