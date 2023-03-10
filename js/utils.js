@@ -1,8 +1,8 @@
 // Date
 
-const formatByTwoDigits = (dateUnit) => dateUnit < 10 ? `0${dateUnit}` : dateUnit;
-
 const TWO_DAYS_MILLISECONDS = 2 * 24 * 3600 * 1000;
+
+const formatByTwoDigits = (dateUnit) => dateUnit < 10 ? `0${dateUnit}` : dateUnit;
 
 const getHumanizedDate = (date, day, month, year) => {
   const now = new Date();
@@ -42,6 +42,35 @@ const formatDate = (dateToFormat) => {
 
 const generateId = () => `id${Date.now()}`;
 
+const getCommentDate = (fieldValue) => {
+  const date = new Date(fieldValue);
+  const now = new Date();
+
+  if (!fieldValue) {
+    return now;
+  }
+
+  // Для выбранной даты устанавливаем текущее время
+  date.setHours(now.getHours());
+  date.setMinutes(now.getMinutes());
+  date.setSeconds(now.getSeconds());
+
+  return date;
+};
+
+const getDataToSend = ({
+  form,
+  dateFieldName,
+} = {}) => {
+  const data = new FormData(form);
+  const commentDate = getCommentDate(form[dateFieldName].value);
+
+  data.set(dateFieldName, commentDate);
+  data.set('commentId', generateId());
+
+  return data;
+};
+
 const convertToJson = (formData) => {
   if (!(formData instanceof FormData)) {
     throw new Error('Некорректные данные формы');
@@ -58,6 +87,6 @@ const convertToJson = (formData) => {
 
 export {
   formatDate,
-  generateId,
+  getDataToSend,
   convertToJson,
 };
