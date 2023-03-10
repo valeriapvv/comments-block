@@ -4,6 +4,7 @@ const Method = {
   Get: 'GET',
   Post: 'POST',
   Delete: 'DELETE',
+  Patch: 'PATCH',
 };
 
 const load = async ({
@@ -72,7 +73,36 @@ const sendCommentDelete = async ({
   }
 };
 
+const sendPatch = async ({
+  url,
+  commentId,
+  body,
+  onSuccess,
+  onFail,
+  onFinal,
+}) => {
+  try {
+    const response = await load({
+      url: `${url}${commentId}`,
+      body,
+      method: Method.Patch,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+
+    const data = await response.json();
+
+    onSuccess(data);
+  } catch (error) {
+    onFail();
+  } finally {
+    onFinal();
+  }
+};
+
 export {
   sendForm,
   sendCommentDelete,
+  sendPatch
 };

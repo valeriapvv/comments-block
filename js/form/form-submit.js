@@ -44,6 +44,7 @@ const getDataToSend = () => {
 
   data.set(FormElement.Date, commentDate);
   data.set('commentId', generateId());
+  data.set('likes', 0);
 
   return data;
 };

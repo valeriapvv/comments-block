@@ -9,7 +9,7 @@ const Insert = {
 };
 
 const getCommentTemplate = (userComment = {}) => {
-  const commentId = userComment.commentId;
+  const {commentId, likes = 0, isLikeOn = false} = userComment;
   const name = userComment[FormElement.UserName];
   const comment = userComment[FormElement.Comment];
   const date = formatDate(
@@ -17,7 +17,8 @@ const getCommentTemplate = (userComment = {}) => {
   );
 
   return (`
-    <li class="chat__item" data-datetime="${date.datetime}" data-comment-id="${commentId}">
+    <li class="chat__item" data-datetime="${date.datetime}"
+    ${isLikeOn ? 'data-like-on' : ''} data-comment-id="${commentId}">
       <span class="chat__username">${name}</span>
       <time class="chat__publication-time" datetime="${date.datetime}">${date.humanized}</time>
       <p class="chat__comment">${comment}</p>
@@ -28,11 +29,11 @@ const getCommentTemplate = (userComment = {}) => {
         </svg>
       </button>
 
-      <button class="chat__favorite" type="button" aria-label="Добавить в избранные">
+      <button class="chat__favorite ${isLikeOn ? 'chat__favorite--checked' : ''}" type="button" aria-label="Добавить в избранные">
         <svg class="chat__favorite-icon" width="24" height="24" aria-hidden="true" focusable="false">
           <use href="img/sprite.svg#heart" />
         </svg>
-        <span class="chat__likes">10</span>
+        <span class="chat__likes">${likes}</span>
       </button>
     </li>
   `);
