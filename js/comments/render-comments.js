@@ -32,6 +32,7 @@ const getCommentTemplate = (userComment = {}) => {
         <svg class="chat__favorite-icon" width="24" height="24" aria-hidden="true" focusable="false">
           <use href="img/sprite.svg#heart" />
         </svg>
+        <span class="chat__likes">10</span>
       </button>
     </li>
   `);

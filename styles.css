@@ -157,67 +157,74 @@ a {
 
 .chat__favorite,
 .chat__delete {
-  width: 32px;
-  height: 32px;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  background-color: transparent;
-  padding: 5px;
-  border-radius: 8px;
-  transition: all 0.1s ease-in;
-  position: absolute;
-
   display: flex;
   align-items: center;
   justify-content: center;
-}
+  min-width: 32px;
+  height: 32px;
+  padding: 4px;
 
-.chat__favorite {
-  position: static;
+  font-size: 16px;
+  color: #ffffff;
 
-  display: flex;
+  border: none;
+  background-color: transparent;
+  outline: none;
+
+  transition: all 0.1s ease-in;
+  cursor: pointer;
 }
 
 .chat__delete {
+  position: absolute;
   top: 5px;
   right: 5px;
+
+  border-radius: 8px;
+
   opacity: 0;
 }
 
-:where(.chat__item:hover, .chat__item:focus-within) .chat__delete {
+.chat__item:hover .chat__delete,
+.chat__delete:focus-within {
   opacity: 1;
-}
-
-.chat__delete:hover,
-.chat__favorite:hover {
-  background-color: #ffffff;
-}
-
-.chat__favorite-icon:hover {
-  color: red;
-}
-
-.chat__delete:focus,
-.chat__favorite:focus,
-.chat__delete:active,
-.chat__favorite:active {
-  background-color: #ffffff;
-  outline: none;
 }
 
 .chat__delete-icon,
 .chat__favorite-icon {
-  transition: color 0.1s ease-in;
+  transition: all 0.1s ease-in;
 }
 
-.chat__delete:hover .chat__delete-icon,
-.chat__favorite:hover .chat__favorite-icon,
-.chat__delete:focus .chat__delete-icon,
-.chat__favorite:focus .chat__favorite-icon,
-.chat__delete:active .chat__delete-icon,
-.chat__favorite:active .chat__favorite-icon {
+.chat__favorite-icon {
+  margin-right: 8px;
+}
+
+:where(
+  .chat__favorite:hover,
+  .chat__favorite:focus-within,
+) .chat__favorite-icon {
+  transform: scale(1.2);
+}
+
+:where(
+  .chat__delete:hover,
+  .chat__delete:focus-within,
+  .chat__delete:active
+  ) .chat__delete-icon,
+:where(
+  .chat__favorite:focus-within,
+  .chat__favorite:active
+) .chat__favorite-icon {
   color: red;
+}
+
+.chat__delete:disabled {
+  cursor: default;
+}
+
+.chat__favorite--checked .chat__favorite-icon {
+  color: red;
+  transform: scale(1);
 }
 
 /* Field */
