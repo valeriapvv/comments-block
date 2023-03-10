@@ -1,7 +1,7 @@
 import {FormElement} from '../data/constants.js';
 import Validation from './validation.js';
 import {getDataToSend} from '../utils.js';
-import {renderComment} from '../comments/render-comments.js';
+import {renderComment} from '../comments/render-comment.js';
 import {showMessage} from '../popups/popup.js';
 import {sendForm} from '../api.js';
 
