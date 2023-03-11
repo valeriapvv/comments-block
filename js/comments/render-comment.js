@@ -1,5 +1,8 @@
 import {FormElement} from '../data/constants.js';
-import {formatDate} from '../utils.js';
+import {
+  formatDate,
+  encodeForHtml,
+} from '../utils.js';
 
 const Insert = {
   Before: 'beforebegin',
@@ -19,9 +22,9 @@ const getCommentTemplate = (userComment = {}) => {
   return (`
     <li class="chat__item" data-datetime="${date.datetime}"
     ${isLikeOn ? 'data-like-on' : ''} data-comment-id="${commentId}">
-      <span class="chat__username">${name}</span>
+      <span class="chat__username">${encodeForHtml(name)}</span>
       <time class="chat__publication-time" datetime="${date.datetime}">${date.humanized}</time>
-      <p class="chat__comment">${comment}</p>
+      <p class="chat__comment">${encodeForHtml(comment)}</p>
 
       <button class="chat__delete" type="button" aria-label="Удалить комментарий">
         <svg class="chat__delete-icon" width="24" height="24" aria-hidden="true" focusable="false">
