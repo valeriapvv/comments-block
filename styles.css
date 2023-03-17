@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: > 1% and last 2 version and not dead
+*/
+
 /* Oswald regular */
 @font-face {
   font-family: "Oswald";
@@ -53,7 +60,8 @@ a {
   border: 0;
   padding: 0;
   white-space: nowrap;
-  clip-path: inset(100%);
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
@@ -74,7 +82,8 @@ a {
   background-color: #00DBDE;
 
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+          user-select: none;
   transition: all 0.3s ease-out;
 }
 
@@ -346,6 +355,7 @@ a {
   left: 0;
 
   width: 400px;
+  height: -moz-fit-content;
   height: fit-content;
   margin: auto;
   padding: 60px;
